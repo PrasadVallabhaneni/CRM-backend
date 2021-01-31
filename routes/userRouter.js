@@ -12,8 +12,6 @@ const auth = require("../middlewares/authorization");
 require("dotenv").config();
 router.use(cors());
 
-
-
 router.route("/login").post(async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
@@ -32,7 +30,9 @@ router.route("/login").post(async (req, res) => {
             { expiresIn: "1h" }
           );
 
-          res.status(200).json({ message: "login success", id: result._id, token });
+          res
+            .status(200)
+            .json({ message: "login success", id: result._id, token });
         } else {
           res.status(200).json({
             message:
@@ -71,14 +71,14 @@ router.route("/forgot").post(async (req, res) => {
           pass: process.env.PASS, // generated ethereal password
         },
       });
-     
+
       // send mail with defined transport object
       let info = await transporter.sendMail({
         from: process.env.SENDER, // sender address
         to: req.body.email, // list of receivers
         subject: "Reset Password ✔", // Subject line
         text: "Hello world?", // plain text body
-        html: `<a href="http://localhost:4000/auth/${req.body.email}/${string}">Click on this link </a>`, // html body
+        html: `<a href="https://crm-backnd.herokuapp.com/auth/${req.body.email}/${string}">Click on this link </a>`, // html body
       });
       await db
         .collection("users")
@@ -105,9 +105,9 @@ router.route("/auth/:mail/:string").get(async (req, res) => {
 
     if (result.string == req.params.string) {
       res.redirect(
-        `http://localhost:3000/reset.html?${req.params.mail}?${req.params.string}`
+        `https://crm-backnd.herokuapp.com/reset.html?${req.params.mail}?${req.params.string}`
       );
-        res.status(200).json({message:'redirecting to resetpassword page'});
+      res.status(200).json({ message: "redirecting to resetpassword page" });
     } else {
       res.status(200).json({ message: "Link Expired" });
     }
@@ -147,43 +147,40 @@ router.route("/resetpassword/:mail/:string").put(async (req, res) => {
   }
 });
 
-
 // create lead //
-router.route("/create-lead").post(auth,async (req, res) => {
+router.route("/create-lead").post(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
     let result = await db
       .collection("users")
       .findOne({ email: req.body.email });
-       let adminMail = await db
-         .collection("users")
-         .findOne({ type: "admin" });
-      let managerMail = await db
-           .collection("users")
-           .findOne({ type: "manager" });
-         
-    if (result.position == "active") {
-      let data = await db.collection("leads").insertOne({...req.body,createdAt:new Date()});
-      if (data) {
-           let transporter = nodemailer.createTransport({
-             host: "smtp.gmail.com",
-             port: 587,
-             secure: false, // true for 465, false for other ports
-             auth: {
-               user: process.env.SENDER, // generated ethereal user
-               pass: process.env.PASS, // generated ethereal password
-             },
-           });
+    let adminMail = await db.collection("users").findOne({ type: "admin" });
+    let managerMail = await db.collection("users").findOne({ type: "manager" });
 
-           // send mail with defined transport object
-           let info = await transporter.sendMail({
-             from: process.env.SENDER, // sender address
-             to: [adminMail.email,managerMail.email], // list of receivers
-             subject: "Lead Created ✔", // Subject line
-             text: "Hello world?", // plain text body
-             html: `A new lead is created by ${req.body.email}`, // html body
-           });
+    if (result.position == "active") {
+      let data = await db
+        .collection("leads")
+        .insertOne({ ...req.body, createdAt: new Date() });
+      if (data) {
+        let transporter = nodemailer.createTransport({
+          host: "smtp.gmail.com",
+          port: 587,
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: process.env.SENDER, // generated ethereal user
+            pass: process.env.PASS, // generated ethereal password
+          },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: process.env.SENDER, // sender address
+          to: [adminMail.email, managerMail.email], // list of receivers
+          subject: "Lead Created ✔", // Subject line
+          text: "Hello world?", // plain text body
+          html: `A new lead is created by ${req.body.email}`, // html body
+        });
         res.status(200).json({ message: "Lead Created", data });
       }
     } else {
@@ -199,7 +196,7 @@ router.route("/create-lead").post(auth,async (req, res) => {
 
 // get lead //
 
-router.route("/get-lead").get(auth,async (req, res) => {
+router.route("/get-lead").get(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
@@ -221,7 +218,7 @@ router.route("/get-lead").get(auth,async (req, res) => {
 });
 
 // update lead //
-router.route("/update-lead").put(auth,async (req, res) => {
+router.route("/update-lead").put(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
@@ -233,7 +230,7 @@ router.route("/update-lead").put(auth,async (req, res) => {
         .collection("leads")
         .updateOne(
           { _id: objectId(req.body.id) },
-          { $set: { lead: req.body.lead , updatedAt:new Date()} }
+          { $set: { lead: req.body.lead, updatedAt: new Date() } }
         );
 
       if (result) {
@@ -252,51 +249,47 @@ router.route("/update-lead").put(auth,async (req, res) => {
   }
 });
 
-
-
 // create service //
-router.route("/create-service").post(auth,async (req, res) => {
+router.route("/create-service").post(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
     let result = await db
       .collection("users")
       .findOne({ email: req.body.email });
-     let adminMail = await db.collection("users").findOne({ type: "admin" });
-     let managerMail = await db
-       .collection("users")
-       .findOne({ type: "manager" });
+    let adminMail = await db.collection("users").findOne({ type: "admin" });
+    let managerMail = await db.collection("users").findOne({ type: "manager" });
 
-     if (result.position == "active") {
-       let data = await db
-         .collection("services")
-         .insertOne({ ...req.body, createdAt: new Date() });
-       if (data) {
-         let transporter = nodemailer.createTransport({
-           host: "smtp.gmail.com",
-           port: 587,
-           secure: false, // true for 465, false for other ports
-           auth: {
-             user: process.env.SENDER, // generated ethereal user
-             pass: process.env.PASS, // generated ethereal password
-           },
-         });
+    if (result.position == "active") {
+      let data = await db
+        .collection("services")
+        .insertOne({ ...req.body, createdAt: new Date() });
+      if (data) {
+        let transporter = nodemailer.createTransport({
+          host: "smtp.gmail.com",
+          port: 587,
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: process.env.SENDER, // generated ethereal user
+            pass: process.env.PASS, // generated ethereal password
+          },
+        });
 
-         // send mail with defined transport object
-         let info = await transporter.sendMail({
-           from: process.env.SENDER, // sender address
-           to: [adminMail.email, managerMail.email], // list of receivers
-           subject: "Service Created ✔", // Subject line
-           text: "Hello world?", // plain text body
-           html: `A new service is created by ${req.body.email}`, // html body
-         });
-         res.status(200).json({ message: "service Created",data });
-       }
-     } else {
-       res
-         .status(200)
-         .json({ message: "You are not allowed to create service" });
-     }
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: process.env.SENDER, // sender address
+          to: [adminMail.email, managerMail.email], // list of receivers
+          subject: "Service Created ✔", // Subject line
+          text: "Hello world?", // plain text body
+          html: `A new service is created by ${req.body.email}`, // html body
+        });
+        res.status(200).json({ message: "service Created", data });
+      }
+    } else {
+      res
+        .status(200)
+        .json({ message: "You are not allowed to create service" });
+    }
 
     clientInfo.close();
   } catch (error) {
@@ -307,7 +300,7 @@ router.route("/create-service").post(auth,async (req, res) => {
 
 // get services //
 
-router.route("/get-services").get(auth,async (req, res) => {
+router.route("/get-services").get(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
@@ -329,7 +322,7 @@ router.route("/get-services").get(auth,async (req, res) => {
 });
 
 // update service //
-router.route("/update-service").put(auth,async (req, res) => {
+router.route("/update-service").put(auth, async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("crm");
@@ -341,7 +334,7 @@ router.route("/update-service").put(auth,async (req, res) => {
         .collection("services")
         .updateOne(
           { _id: objectId(req.body.id) },
-          { $set: { service: req.body.service ,updatedAt:new Date()} }
+          { $set: { service: req.body.service, updatedAt: new Date() } }
         );
 
       if (result) {
@@ -361,30 +354,32 @@ router.route("/update-service").put(auth,async (req, res) => {
 });
 
 // create contact / /
-  router.route("/create-contact").post(auth, async (req, res) => {
-    try {
-      let clientInfo = await mongoClient.connect(dbURL);
-      let db = clientInfo.db("crm");
-      let result = await db
-        .collection("users")
-        .findOne({ email: req.body.email });
-      if (result.position == "active") {
-        let data = await db
-          .collection("contacts")
-          .insertOne({ ...req.body, createdAt: new Date() });
-        if (data) {
-          res.status(200).json({ message: "Contact Created", data });
-        }
-      } else {
-        res.status(200).json({ message: "You are not allowed to create contact" });
+router.route("/create-contact").post(auth, async (req, res) => {
+  try {
+    let clientInfo = await mongoClient.connect(dbURL);
+    let db = clientInfo.db("crm");
+    let result = await db
+      .collection("users")
+      .findOne({ email: req.body.email });
+    if (result.position == "active") {
+      let data = await db
+        .collection("contacts")
+        .insertOne({ ...req.body, createdAt: new Date() });
+      if (data) {
+        res.status(200).json({ message: "Contact Created", data });
       }
-
-      clientInfo.close();
-    } catch (error) {
-      console.log(error);
-      res.send(500);
+    } else {
+      res
+        .status(200)
+        .json({ message: "You are not allowed to create contact" });
     }
-  });
+
+    clientInfo.close();
+  } catch (error) {
+    console.log(error);
+    res.send(500);
+  }
+});
 
 // get contact //
 
@@ -431,7 +426,9 @@ router.route("/update-contact").put(auth, async (req, res) => {
         res.status(200).json({ message: "no contact found" });
       }
     } else {
-      res.status(200).json({ message: "ypu are not allowed to update contacts" });
+      res
+        .status(200)
+        .json({ message: "ypu are not allowed to update contacts" });
     }
 
     clientInfo.close();
@@ -440,7 +437,5 @@ router.route("/update-contact").put(auth, async (req, res) => {
     res.send(500);
   }
 });
-
-
 
 module.exports = router;

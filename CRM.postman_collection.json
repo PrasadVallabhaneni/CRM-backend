@@ -1,0 +1,850 @@
+{
+	"info": {
+		"_postman_id": "2372fa9d-d3c3-46e4-a730-6e6171497be1",
+		"name": "CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userRoutes",
+			"item": [
+				{
+					"name": "POST create-lead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"email\":\"vallabhanenivenkataprasad@gmail.com\",\n   \"lead\":{\n        \"company\":\"some\",\n    \"contact\":\"some@gmail.com\",\n    \"status\":\"new\"\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/create-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"create-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST create-contact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NTc1LCJleHAiOjE2MTIxMTAxNzV9.hDDW1irSkuexigR3vkFnLF9-ZQfHCor3mTcvNeMzRbI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"email\":\"vallabhanenivenkataprasad@gmail.com\",\n   \"contact\":{\n        \"company\":\"some\",\n    \"contact\":\"some@gmail.com\",\n    \"status\":\"new\"\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/create-contact",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"create-contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET leads",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"vallabhanenivenkataprasad@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/get-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"get-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT update-lead",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\":\"6012d54cd04a718e18841204\",\n    \"email\":\"admin@gmail.com\",\n      \"lead\": {\n            \"company\": \"some\",\n            \"contact\": \"someUpda@gmail.com\",\n            \"status\": \"newUpdated\"\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/update-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"update-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT update-contact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NTc1LCJleHAiOjE2MTIxMTAxNzV9.hDDW1irSkuexigR3vkFnLF9-ZQfHCor3mTcvNeMzRbI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\":\"6012d54cd04a718e18841204\",\n    \"email\":\"admin@gmail.com\",\n      \"contact\": {\n            \"company\": \"some\",\n            \"contact\": \"someUpda@gmail.com\",\n            \"status\": \"newUpdated\"\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/update-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"update-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST create-service",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"email\":\"bruce2@gmail.com\",\n      \"service\": {\n            \"service\": \"service1\",\n            \"contact\": \"someUpda@gmail.com\",\n            \"status\": \"created\"\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/create-service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"create-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT update-service",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"id\":\"60139da6790e5ffd5e535803\",\n    \"email\":\"bruce2@gmail.com\",\n      \"service\": {\n            \"service\": \"someUpdated2\",\n            \"contact\": \"someUpda@gmail.com\",\n            \"status\": \"newUpdated\"\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/update-service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"update-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET services",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"vallabhanenivenkataprasad@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/get-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"get-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST user/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"email\":\"user1@gmail.com\",\n    \"password\":\"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "adminRoutes",
+			"item": [
+				{
+					"name": "POST add-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"user4\",\n    \"email\":\"user4@gmail.com\",\n    \"password\":\"user\",\n    \"type\":\"employee\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/admin/add-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"add-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST admin-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET get-lead",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bruce2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/admin/get-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"get-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all leads with status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/admin/leads/newUpdated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"leads",
+								"newUpdated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all leads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/admin/leads",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"leads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/admin/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET services/status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/admin/services/created",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"services",
+								"created"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT position",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"position\":\"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/admin/position",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"admin",
+								"position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET offusers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "managerRoutes",
+			"item": [
+				{
+					"name": "POST add-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NTc1LCJleHAiOjE2MTIxMTAxNzV9.hDDW1irSkuexigR3vkFnLF9-ZQfHCor3mTcvNeMzRbI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"user6\",\n    \"email\":\"user6@gmail.com\",\n    \"password\":\"user\",\n    \"type\":\"employee\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manager/add-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"add-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST admin-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manager/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET get-lead",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bruce2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manager/get-lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"get-lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all leads with status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NTc1LCJleHAiOjE2MTIxMTAxNzV9.hDDW1irSkuexigR3vkFnLF9-ZQfHCor3mTcvNeMzRbI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/manager/leads/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"leads",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all leads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/manager/leads",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"leads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/manager/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET services/status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/manager/services/created",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"services",
+								"created"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT position",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjExOTE1Nzg1LCJleHAiOjE2MTE5MTkzODV9.RYJAzt1gVBBxOy1NpFT1pg9LqTr7JRGsmK2UCrzkPH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"position\":\"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manager/position",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET offusers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDEzYTUxNWE5YWVmOTBlYzAxMTNmNjUiLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NTc1LCJleHAiOjE2MTIxMTAxNzV9.hDDW1irSkuexigR3vkFnLF9-ZQfHCor3mTcvNeMzRbI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/manager/offusers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manager",
+								"offusers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
