@@ -156,9 +156,34 @@ router.route("/create-lead").post(auth,async (req, res) => {
     let result = await db
       .collection("users")
       .findOne({ email: req.body.email });
+       let adminMail = await db
+         .collection("users")
+         .findOne({ type: "admin" });
+      let managerMail = await db
+           .collection("users")
+           .findOne({ type: "manager" });
+         
     if (result.position == "active") {
       let data = await db.collection("leads").insertOne({...req.body,createdAt:new Date()});
       if (data) {
+           let transporter = nodemailer.createTransport({
+             host: "smtp.gmail.com",
+             port: 587,
+             secure: false, // true for 465, false for other ports
+             auth: {
+               user: process.env.SENDER, // generated ethereal user
+               pass: process.env.PASS, // generated ethereal password
+             },
+           });
+
+           // send mail with defined transport object
+           let info = await transporter.sendMail({
+             from: process.env.SENDER, // sender address
+             to: [adminMail.email,managerMail.email], // list of receivers
+             subject: "Lead Created ✔", // Subject line
+             text: "Hello world?", // plain text body
+             html: `A new lead is created by ${req.body.email}`, // html body
+           });
         res.status(200).json({ message: "Lead Created", data });
       }
     } else {
@@ -237,16 +262,41 @@ router.route("/create-service").post(auth,async (req, res) => {
     let result = await db
       .collection("users")
       .findOne({ email: req.body.email });
-    if (result.position == "active") {
-      let data = await db.collection("services").insertOne(
-        {...req.body,createdAt:new Date()}
-      );
-      if (data) {
-        res.status(200).json({ message: "Service Created", data });
-      }
-    } else {
-      res.status(200).json({ message: "You are not allowed to create service" });
-    }
+     let adminMail = await db.collection("users").findOne({ type: "admin" });
+     let managerMail = await db
+       .collection("users")
+       .findOne({ type: "manager" });
+
+     if (result.position == "active") {
+       let data = await db
+         .collection("services")
+         .insertOne({ ...req.body, createdAt: new Date() });
+       if (data) {
+         let transporter = nodemailer.createTransport({
+           host: "smtp.gmail.com",
+           port: 587,
+           secure: false, // true for 465, false for other ports
+           auth: {
+             user: process.env.SENDER, // generated ethereal user
+             pass: process.env.PASS, // generated ethereal password
+           },
+         });
+
+         // send mail with defined transport object
+         let info = await transporter.sendMail({
+           from: process.env.SENDER, // sender address
+           to: [adminMail.email, managerMail.email], // list of receivers
+           subject: "Service Created ✔", // Subject line
+           text: "Hello world?", // plain text body
+           html: `A new service is created by ${req.body.email}`, // html body
+         });
+         res.status(200).json({ message: "service Created",data });
+       }
+     } else {
+       res
+         .status(200)
+         .json({ message: "You are not allowed to create service" });
+     }
 
     clientInfo.close();
   } catch (error) {
